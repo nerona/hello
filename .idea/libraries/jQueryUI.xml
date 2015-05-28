@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jQueryUI" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="jQuery UI" />
+      <option name="frameworkVersion" value="1.8.22" />
+    </properties>
+    <CLASSES />
+    <DOCUMENTATION>
+      <root url="http://libs.baidu.com/jqueryui/1.8.22/jquery-ui.min.js" />
+    </DOCUMENTATION>
+    <SOURCES />
+  </library>
+</component>
