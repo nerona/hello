@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="40bacb4b-e893-41af-8067-e3a22a580382" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/1-账号绑定.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/2-医院简介.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/4-科室介绍.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/6-医生.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/template.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/home.html" afterPath="$PROJECT_DIR$/html/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hello.iws" />
@@ -44,8 +38,8 @@
       <file leaf-file-name="home.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47241378" vertical-offset="4046" max-vertical-offset="4752">
-              <caret line="235" column="11" selection-start-line="235" selection-start-column="11" selection-end-line="235" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.37931034" vertical-offset="1886" max-vertical-offset="4806">
+              <caret line="112" column="58" selection-start-line="112" selection-start-column="58" selection-end-line="112" selection-end-column="58" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -312,7 +306,15 @@
       <created>1432792636808</created>
       <updated>1432792636808</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test 1.1">
+      <created>1432803721622</created>
+      <updated>1432803721622</updated>
+    </task>
+    <task id="LOCAL-00007" summary="test 1.1">
+      <created>1432803948172</created>
+      <updated>1432803948172</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -358,7 +360,8 @@
     <MESSAGE value="test 0.2" />
     <MESSAGE value="test 0.3" />
     <MESSAGE value="test 0.7" />
-    <option name="LAST_COMMIT_MESSAGE" value="test 0.7" />
+    <MESSAGE value="test 1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 1.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -415,8 +418,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/html/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47241378" vertical-offset="4046" max-vertical-offset="4752">
-          <caret line="235" column="11" selection-start-line="235" selection-start-column="11" selection-end-line="235" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.37931034" vertical-offset="1886" max-vertical-offset="4806">
+          <caret line="112" column="58" selection-start-line="112" selection-start-column="58" selection-end-line="112" selection-end-column="58" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
