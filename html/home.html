@@ -252,6 +252,11 @@
             $("#myCarousel").carousel(2);
         });
     });
+    $(function(){
+        $('#myCarousel').on('slide.bs.carousel', function () {
+           // alert("当调用 slide 实例方法时立即触发该事件。");
+        });
+    });
 </script>
 </body>
 </html>
