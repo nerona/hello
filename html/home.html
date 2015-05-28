@@ -59,6 +59,39 @@
             -moz-border-radius: 1px;
             border-radius: 1px;
         }
+        ul.nav-tabs{
+            width: 140px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+        ul.nav-tabs li{
+            margin: 0;
+            border-top: 1px solid #ddd;
+        }
+        ul.nav-tabs li:first-child{
+            border-top: none;
+        }
+        ul.nav-tabs li a{
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 0;
+        }
+        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+            color: #fff;
+            background: #0088cc;
+            border: 1px solid #0088cc;
+        }
+        ul.nav-tabs li:first-child a{
+            border-radius: 4px 4px 0 0;
+        }
+        ul.nav-tabs li:last-child a{
+            border-radius: 0 0 4px 4px;
+        }
+        ul.nav-tabs.affix{
+            top: 30px; /* Set the top position of pinned element */
+        }
     </style>
     <script>
         $(function(){
@@ -97,15 +130,15 @@
 </head>
 <body>
 <div class="container">
-    <div style="display:block;margin:10px;width:30px;height:30px;border-style:solid;border-width:20px;                      border-color:#f00 #00f #0f0 #f0f;background-color:#fff"></div>
+    <div style="display:block;margin:10px;width:50px;height:50px;border-style:solid;border-width:20px;                      border-color:#f00 #00f #0f0 #f0f;background-color:#fff"></div>
 
     <div style="display:block;margin:10px;width:0;height:0;border-style:solid;border-width:20px;border-color:#f00           #00f #0f0 #f0f;background-color:#fff"></div>
 
     <div style="display:block;margin:10px;width:0;height:0;border-style:solid;border-width:20px;                            border-color:transparent #00f transparent transparent;"></div>
 
     <div style="position:relative;display:block;width:50px;height:50px;">
-    <div style="display:block;position:absolute;left:10px;top:10px;width:0;height:0;border-style:solid;                     border-width:20px;border-color:transparent #00f transparent transparent;"></div>
-    <div style="display:block;position:absolute;left:16px;top:10px;;width:0;height:0;border-style:solid;                    border-width:20px;border-color:transparent #fff transparent transparent;"></div>
+        <div style="display:block;position:absolute;left:10px;top:10px;width:0;height:0;border-style:solid;                     border-width:20px;border-color:transparent #00f transparent transparent;"></div>
+        <div style="display:block;position:absolute;left:16px;top:10px;;width:0;height:0;border-style:solid;                    border-width:20px;border-color:transparent #fff transparent transparent;"></div>
     </div>
     <div class="carousel slide" id="myCarousel">
         <ol class="carousel-indicators">
@@ -140,6 +173,7 @@
             <input type="button" class="btn slide-three" value="Slide 3">
         </div>
     </div>
+
     <button type="button" class="btn btn-primary a" data-loading-text="Loading...">button</button>
     <button type="button" class="btn btn-success btn-group" data-toggle="buttons">button</button>
     <div class="panel-group" id="accordion">
