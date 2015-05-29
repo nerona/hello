@@ -3,24 +3,20 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <style>
-        table, th , td {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-        table tr:nth-child(odd) {
-            background-color: #f1f1f1;
-        }
-        table tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-    </style>
+    <script src="//www.w3cschool.cc/try/angularjs/1.2.5/angular.min.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/anjs.js"></script>
 </head>
-<body ng-app="" ng-init="a=5;b=4;person={firstName:'John',lastName:'Doe'};names=['Jani','Hege','Kai']">
+<body ng-app="app1">
 <div ng-controller="personController">
     <button ng-click="count = count+1">Click</button>
-    <p ng-bind="count"></p>
+    <p>{{count}}</p>
+    <div ng-include="'inner.html'"></div>
+    <button ng-click="toggle()">hide/show</button>
+    <p ng-hide="myVar">
+        fName:<input type="text" ng-model="NAME.fName"><br>
+        lName:<input type="text" ng-model="NAME.lName"><br>
+    </p>
     <p>
         <button ng-disabled="mySwitch">点我!</button>
     </p>
@@ -30,8 +26,44 @@
     <p>
         {{ mySwitch }}
     </p>
+    <form novalidate>
+        First Name:<br>
+        <input type="text" ng-model="user.fName"><br>
+        Last Name:<br>
+        <input type="text" ng-model="user.lName">
+        <br><br>
+        <button ng-click="reset()">RESET</button>
+    </form>
+    <form name="myForm" novalidate>
+
+        <p>Username:<br>
+            <input type="text" name="user" ng-model="u" required>
+  <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+  <span ng-show="myForm.user.$error.required">Username is required.</span>
+  </span>
+        </p>
+
+        <p>Email:<br>
+            <input type="email" name="email" ng-model="email" required>
+  <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+  <span ng-show="myForm.email.$error.required">Email is required.</span>
+  <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+  </span>
+        </p>
+
+        <p>
+            <input type="submit"
+                   ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||
+  myForm.email.$dirty && myForm.email.$invalid">
+        </p>
+
+    </form>
+    <p>form = {{user}}</p>
+    <p>master = {{NAME}}</p>
     <p ng-show="true">show</p>
     <p ng-show="false">no show</p>
+    <p ng-hide="true">hide</p>
+    <p ng-hide="false">no hide</p>
     <p>try input:</p>
     <p>Name:<input type="text" ng-model="name"></p>
     <p ng-bind="name"></p>
@@ -44,24 +76,77 @@
     <p>{{NAME.fName + " " + NAME.lName | uppercase}}</p>
     <p>{{NAME.fullName() | lowercase}}</p>
     <p>{{full()}}</p>
-</div>
-<div ng-controller="nameController">
+
     <p>try input:</p>
     <p>Name:<input type="text" ng-model="name"></p>
     <ul>
         <li ng-repeat="x in N | orderBy:'n' | filter:name">{{x.n + ',' + x.c}}</li>
     </ul>
 </div>
-<div  ng-controller="customersController" ng-init="mySwitch=true">
+<div class="container" ng-controller="userController">
 
-    <table>
-        <tr ng-repeat="x in names">
-            <td>{{ x.Name }}</td>
-            <td>{{ x.Country }}</td>
-        </tr>
+    <h3>Users</h3>
+
+    <table class="table table-striped">
+        <thead><tr>
+            <th>Edit</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr></thead>
+        <tbody><tr ng-repeat="user in users">
+            <td>
+                <button class="btn" ng-click="editUser(user.id)">
+                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+                </button>
+            </td>
+            <td>{{ user.fName }}</td>
+            <td>{{ user.lName }}</td>
+        </tr></tbody>
     </table>
+
+    <hr>
+    <button class="btn btn-success" ng-click="editUser('new')">
+        <span class="glyphicon glyphicon-user"></span> Create New User
+    </button>
+    <hr>
+
+    <h3 ng-show="edit">Create New User:</h3>
+    <h3 ng-hide="edit">Edit User:</h3>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">First Name:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="fName" ng-disabled="!edit" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="lName" ng-disabled="!edit" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password:</label>
+            <div class="col-sm-10">
+                <input type="password" ng-model="passw1" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Repeat:</label>
+            <div class="col-sm-10">
+                <input type="password" ng-model="passw2" placeholder="Repeat Password">
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <button class="btn btn-success" ng-disabled="error || incomplete">
+        <span class="glyphicon glyphicon-save"></span> Save Changes
+    </button>
 </div>
-<script src="../js/anjs.js"></script>
-<script src="//www.w3cschool.cc/try/angularjs/1.2.5/angular.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>
