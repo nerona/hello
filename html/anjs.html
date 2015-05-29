@@ -3,13 +3,65 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
-<body>
-<div ng-app="">
+<body ng-app="" ng-init="a=5;b=4;person={firstName:'John',lastName:'Doe'};names=['Jani','Hege','Kai']">
+<div ng-controller="personController">
+    <button ng-click="count = count+1">Click</button>
+    <p ng-bind="count"></p>
+    <p>
+        <button ng-disabled="mySwitch">点我!</button>
+    </p>
+    <p>
+        <input type="checkbox" ng-model="mySwitch"/>按钮
+    </p>
+    <p>
+        {{ mySwitch }}
+    </p>
+    <p ng-show="true">show</p>
+    <p ng-show="false">no show</p>
     <p>try input:</p>
     <p>Name:<input type="text" ng-model="name"></p>
     <p ng-bind="name"></p>
+    <p>{{person.firstName + person.lastName}}</p>
+    <p>lastName: <span ng-bind="person.lastName"></span></p>
+    <ul>
+        <li ng-repeat="x in names">{{x}}</li>
+    </ul>
+    <p>{{a * b | currency}}</p>
+    <p>{{NAME.fName + " " + NAME.lName | uppercase}}</p>
+    <p>{{NAME.fullName() | lowercase}}</p>
+    <p>{{full()}}</p>
 </div>
+<div ng-controller="nameController">
+    <p>try input:</p>
+    <p>Name:<input type="text" ng-model="name"></p>
+    <ul>
+        <li ng-repeat="x in N | orderBy:'n' | filter:name">{{x.n + ',' + x.c}}</li>
+    </ul>
+</div>
+<div  ng-controller="customersController" ng-init="mySwitch=true">
+
+    <table>
+        <tr ng-repeat="x in names">
+            <td>{{ x.Name }}</td>
+            <td>{{ x.Country }}</td>
+        </tr>
+    </table>
+</div>
+<script src="../js/anjs.js"></script>
 <script src="//www.w3cschool.cc/try/angularjs/1.2.5/angular.min.js"></script>
 </body>
 </html>

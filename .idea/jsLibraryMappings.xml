@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Dojo-1.8.3, ExtJS GPL-4.2, YUI-3.10.0, jQuery-2.0.0, jQueryUI}" />
+    <file url="PROJECT" libraries="{Dojo-1.8.3, ExtJS GPL-4.2, YUI-3.10.0, angular, jQuery-2.0.0, jQueryUI}" />
     <includedPredefinedLibrary name="Node.js Globals" />
     <includedPredefinedLibrary name="WebGL" />
   </component>
