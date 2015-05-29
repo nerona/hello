@@ -86,3 +86,17 @@ app.controller("userController",function($scope){
         }
     };
 });
+
+var myApp = angular.module("myApp",[]);
+myApp.controller("myCtrl",function($scope){
+    $scope.message = '';
+    $scope.save = function(){
+        $scope.message = '';
+    };
+    $scope.clear = function() {
+        $scope.message = "";
+    }
+    $scope.left = function(){
+        return 100 - $scope.message.length;
+    };
+});
