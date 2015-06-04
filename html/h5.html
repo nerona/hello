@@ -7,6 +7,7 @@
     <!--[if lt IE 9]>
     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
     <![endif]-->
+
     <style>
         canvas {
             border: 1px solid #dddddd;
@@ -25,7 +26,6 @@
             -webkit-text-overflow:ellipsis;
             -moz-text-overflow:ellipsis;
             white-space:nowrap;
-            
         }
         .text2 {
             width:200px;
@@ -35,6 +35,58 @@
             -webkit-box-orient:vertical;
             overflow:hidden;
         }
+        .linear {
+            background: linear-gradient(to bottom right, red,orange,yellow,green,blue,indigo,violet);
+            float: left;
+        }
+        .linear2 {
+            background: linear-gradient(to left,rgba(255,0,0,0),rgba(255,0,0,1));
+            float: left;
+            transition: width 2s, height 2s, transform 2s;
+            -webkit-transition: width 2s, height 2s, transform 2s;
+            animation-name: myAnim;
+            animation-duration: 2s;
+            animation-timing-function: ease;
+            animation-delay: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-play-state: running;
+            -webkit-animation-name: myAnim;
+            -webkit-animation-duration: 2s;
+            -webkit-animation-timing-function: ease;
+            -webkit-animation-delay: 2s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-play-state: running;
+        }
+        .radial {
+            background: radial-gradient(ellipse, red, yellow, green);
+            float: left;
+        }
+        .radial2 {
+            background: radial-gradient(circle, red, yellow, green);
+            float: left;
+            /*transition: width 2s, height 2s, transform 2s;
+            -webkit-transition: width 2s, height 2s, transform 2s; */
+            transition-property: width;
+            transition-duration: 2s;
+            transition-timing-function: linear;
+            transition-delay: 2s;
+            transition: width 2s linear 2s, height 2s linear 2s, transform 2s linear 2s;
+        }
+        .clearfix:after {
+            content:".";
+            display:block;
+            height:0;
+            clear:both;
+            visibility:hidden;
+        }
+        .clearfix {
+            display:inline-block;
+        } /* Hide from IE Mac */
+        .clearfix {
+            display:block;
+        } /* End hide from IE Mac */ /* end of clearfix */
         @media all and (orientatiion:landscape) {
             
         }
@@ -53,11 +105,68 @@
 
             }
         }
+        h2 {
+            font-size: 20px;
+            text-shadow: 5px 5px 5px red;
+        }
+        div:hover {
+            width: 350px;
+            height: 100px;
+            transform: scale(.5);
+        }
+        @keyframes myAnim {
+            0% {
+               
+            }
+            100% {
+
+            }
+        }
+        .banner {
+            background: url("../img/banner.png");
+        }
+        .arrow {
+            display: block;
+            height: 30px;
+            width: 30px;
+            border-left: 2px solid #ff0000;
+            border-bottom: 2px solid #ff0000;
+            transform: skew(-20deg,-20deg);
+            /* transform: rotate(-45deg);
+            transform: matrix(); */
+        }
+        .arr {
+            transform: rotate(-45deg);
+        }
+        ::-webkit-input-placeholder { /* WebKit browsers */
+            color:    #999;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:    #999;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:    #999;
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:    #999;
+        }
+
     </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="300" height="150"></canvas>
-    <div></div>
+    <div class="linear"></div>
+    <div class="linear2"></div>
+
+    <p class="clearfix"></p>
+    <div class="radial"></div>
+    <div class="radial2"></div>
+    <p class="clearfix"></p>
+    <div class="banner"></div>
+    <h2>Hello Css</h2>
+    <input type="text" placeholder="text">
+    <p class="arr">
+        <span class="arrow"></span>
+    </p>
     <canvas id="cube" width="300" height="150"></canvas>
     <div class="text1">热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个      </div>
 
@@ -65,6 +174,8 @@
 
     <div class="text2">热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个
     </div>
+
+    <canvas id="myCanvas" width="300" height="150"></canvas>
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
