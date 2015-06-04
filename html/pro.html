@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.18.1/build/cssnormalize/cssnormalize-min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+        body, ul, li{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            background: #000;
+            display:block;
+        }
+        ul {
+            border: 1px solid #9acfea;
+            float: left;
+        }
+        ul li {
+            list-style: none;
+            float: left;
+            padding-right: 3px;
+            vertical-align: middle;
+            background: #dddddd;
+        }
+        .a {
+            /*非IE的主流浏览器识别的垂直居中的方法*/
+            display: table-cell;
+            vertical-align:middle;
+            /*设置水平居中*/
+            text-align:center;
+            /* 针对IE的Hack */
+            *display: block;
+            *font-size: 175px;/*约为高度的0.873，200*0.873 约为175*/
+            *font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+            width:200px;
+            height:200px;
+            border: 1px solid #eee;
+        }
+        .a img {
+            vertical-align: middle;
+        }
+        .b {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #eee;
+            line-height: 100px;
+            overflow: hidden;
+        }
+        .c {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #eee;
+        }
+        .c p {
+            width: 40px;
+            margin: 0 auto;
+            text-align:center;
+        }
+        #div1 {
+            width:350px;
+            height:70px;
+            padding:10px;
+            border:1px solid #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+<p id="demo">点击按钮获取您当前坐标（可能需要比较长的时间获取）：</p>
+<button onclick="getLocation()">点我</button>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+    <polygon points="100,10 40,180 190,60 10,60 160,180"
+             style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+</svg>
+<div id="div1" ondrop="drop(event)"
+     ondragover="allowDrop(event)"></div>
+
+<img id="drag1" src="/hello/img/banner.png" draggable="true"
+     ondragstart="drag(event)" width="336" height="69">
+<meter value="2" min="0" max="10">2 out of 10</meter><br>
+<meter value="0.6">60%</meter>
+<progress value="22" max="100">
+</progress>
+<audio controls="controls">
+    <source src="#" type="audio/ogg">
+    <source src="#" type="audio/mpeg">
+</audio>
+<video controls="controls">
+    <source src="#" type="video/mp4">
+</video>
+<input list="data">
+<datalist id="data">
+    <option value="html5"></option>
+    <option value="css3"></option>
+    <option value="js"></option>
+</datalist>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+    <input type="range" id="a" value="50">100
+    +<input type="number" id="b" value="50">
+    =<output name="x" for="a b"></output>
+</form>
+<div class="a"><img src="/hello/img/banner.png"></div>
+<div class="b"><mark>XXX</mark>XXX</div>
+<div class="c"><p>XXX</p></div>
+<canvas class="canvas" id="canvas">您的浏览器不支持HTML5元素，请升级您的浏览器！</canvas>
+<div id="arr"></div>
+<script>
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+        }
+        else{x.innerHTML="该浏览器不支持获取地理位置。";}
+    }
+    function showPosition(position)
+    {
+        x.innerHTML="纬度: " + position.coords.latitude +
+                "<br>经度: " + position.coords.longitude;
+    }
+    function showError(error)
+    {
+        switch(error.code)
+        {
+            case error.PERMISSION_DENIED:
+                x.innerHTML="用户拒绝对获取地理位置的请求。"
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML="位置信息是不可用的。"
+                break;
+            case error.TIMEOUT:
+                x.innerHTML="请求用户地理位置超时。"
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML="未知错误。"
+                break;
+        }
+    }
+    function allowDrop(ev)
+    {
+        ev.preventDefault();
+    }
+
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
+
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var data=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+    $(function(){
+        var canvasBg = new PointLine('#canvas', 15, parseInt($(window).height()), parseInt($(window).width()));
+        canvasBg.lineColor = 'red';
+        canvasBg.drawLine().drawPoint(15).reDraw(100, 50)//.mouseMove();
+    });
+
+    //PointLine object
+    function PointLine(ele, num, height, width){
+        this.ele = $(ele);
+        this.num = num ? parseInt(num) : 10;
+        this.radius = 3;
+        this.height = height ? parseInt(height) : 800;
+        this.width = width ? parseInt(width) : 600;
+        this.pointColor = '#fff';
+        this.lineColor = '#fff';
+        this.pointArr = [];
+        //point Array
+        var ele = this.ele, num = this.num,  height = this.height, width =this.width;
+        ele.get(0).height = height;
+        ele.get(0).width = width;
+        for(var i=0; i<num; i++){
+            var px = Math.floor(Math.random() * (width - 1) + 1), py = Math.floor(Math.random() * (height - 1) + 1);
+            (function(){
+                for(var j in this.pointArr){
+                    if(px == this.pointArr[j][0]){
+                        px = Math.floor(Math.random() * (width - 1) + 1);
+                    }else{
+                        return px;
+                    }
+                }
+            }());
+            this.pointArr.push([px, py]);
+        }
+    }
+    PointLine.prototype = {
+        drawPoint : function(){
+            var ele = this.ele, eleGet = ele.get(0), radius = this.radius, height = this.height, pointColor = this.pointColor, arr = this.pointArr;
+            //radius value
+            if(arguments.length >= 1){
+                radius = !isNaN(parseInt(arguments[0])) ? parseInt(arguments[0]) : radius;
+                this.radius = radius;
+            }
+            //3D Array
+            var leftArr = [], rightArr = [];
+            for(var i in arr){
+                if(arr[i][0] <= height/2){
+                    leftArr.push(arr[i]);
+                }else{
+                    rightArr.push(arr[i]);
+                }
+            }
+            //draw point
+            if(eleGet.getContext){
+                var leftRadius = 0, rightRadius = 0;
+                for(var i in leftArr){
+                    drawAnim(leftArr[i], leftRadius);
+                    leftRadius += radius/leftArr.length/1.2;
+                }
+                for(var i in rightArr){
+                    drawAnim(rightArr[i], rightRadius);
+                    rightRadius += radius/rightArr.length/1.2;
+                }
+            }
+            function drawAnim(arr, sub){
+                var point = eleGet.getContext('2d');
+                point.fillStyle = pointColor;
+                point.beginPath();
+                point.arc(arr[0], arr[1], (radius - sub), 0, 2*Math.PI, false);
+                point.fill();
+            }
+            return this;
+        },
+        drawLine : function(){
+            var eleGet = this.ele.get(0), lineColor = this.lineColor, arr = this.pointArr;
+            if(eleGet.getContext){
+                var line = eleGet.getContext('2d');
+                line.strokeStyle = lineColor;
+                line.beginPath();
+                for(var i=0; i<arr.length; i++){
+                    for(var j=1; j<arr.length - i; j++){
+                        line.moveTo(arr[i][0], arr[i][1]);
+                        line.lineTo(arr[i+j][0], arr[i+j][1]);
+                    }
+                }
+                line.stroke();
+            }
+            return this;
+        },
+        reDraw : function(scope, speed){
+            if(!isNaN(scope) && !isNaN(speed)){
+                var _this = this, eleGet = this.ele.get(0), arr = this.pointArr, newArr = arr.slice(0), aArr = [], bArr = [], step = 0;
+                var redraw = eleGet.getContext('2d');
+                //变化数组
+                for(var i=-scope; i<=scope; i++){
+                    aArr.push(i);
+                }
+                aArr = aArr.concat(aArr.slice(0).reverse());
+                for(var i=scope; i>=-scope; i--){
+                    bArr.push(i);
+                }
+                bArr = bArr.concat(bArr.slice(0).reverse());
+                for(var i=0; i<aArr.length; i++){
+                    if(aArr[i + 1] == aArr[i]){
+                        aArr.splice(i, 2, aArr[i]);
+                    }
+                    if(bArr[i + 1] == bArr[i]){
+                        bArr.splice(i, 2, bArr[i]);
+                    }
+                }
+                aArr.splice(aArr.length - 1, 1);
+                bArr.splice(bArr.length - 1, 1);
+                //定时器
+                setInterval(function(){loop()}, speed);
+                function loop(){
+                    redraw.clearRect(0, 0, _this.width, _this.height);
+                    if(step < aArr.length - 1){
+                        step ++;
+                    }else{
+                        step = 0;
+                    }
+                    var na = aArr[step], nb = bArr[step];
+                    for(var i=0; i<arr.length; i++){
+                        if(i % 2 == 0){
+                            arr.splice(i, 1, [newArr[i][0] + nb, newArr[i][1] + na]);
+                        }else{
+                            arr.splice(i, 1, [newArr[i][0] + na, newArr[i][1] + nb]);
+                        }
+                    }
+                    _this.drawLine().drawPoint(_this.radius);
+                }
+            }
+            return this;
+        },
+        mouseMove : function(){
+            var _this = this, ele = this.ele, eleGet = ele.get(0), height = this.height, width = this.width, arr = this.pointArr;
+            var redraw = eleGet.getContext('2d');
+            ele.hover(function(ev){
+                var mx = ev.originalEvent.x || ev.originalEvent.layerX || 0, my = ev.originalEvent.y || ev.originalEvent.layerY || 0;
+                ele.mousemove(function(e){
+                    redraw.clearRect(0, 0, width, height);
+                    var mxl = e.originalEvent.x || e.originalEvent.layerX || 0, myl = e.originalEvent.y || e.originalEvent.layerY || 0;
+                    for(var i in arr){
+                        arr.splice(i, 1, [arr[i][0] + mxl - mx, arr[i][1] + myl - my]);
+                    }
+                    _this.drawLine().drawPoint(_this.radius);
+                    mx = mxl;
+                    my = myl;
+                });
+            }, function(){
+                ele.off('mousemove');
+            });
+            return this;
+        }
+    }
+</script>
+</body>
+</html>
